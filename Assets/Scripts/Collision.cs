@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Collision : MonoBehaviour
 {
+    // Reference to the GameManager
     private GameManager _gameManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    // Start is called before the first frame update
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -13,8 +15,9 @@ public class Collision : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void OnTriggerEnter(Collider other) {
+    // Called when this collider enters a trigger collider
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.CompareTag("Obstacle"))
         {
             _gameManager.GameOver();

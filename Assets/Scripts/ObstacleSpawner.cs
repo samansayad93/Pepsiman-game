@@ -13,7 +13,7 @@ public class ObstacleSpawner : MonoBehaviour
     private float _maxDistance = 7f;
     private float laneDistance = 2f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called before the first frame update
     void Start()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -34,6 +34,7 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+    // Spawns an obstacle in a random lane at the next spawn Z position
     void SpawnObstacle()
     {
         int lane = Random.Range(0, 3); // 0 = Left, 1 = Middle, 2 = Right

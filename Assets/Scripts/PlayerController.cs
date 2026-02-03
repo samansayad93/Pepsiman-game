@@ -4,18 +4,12 @@ public class PlayerController : MonoBehaviour
 {
     private float _forwardSpeed = 5f;
     private float _laneDistance = 2f;
-
-    private int _currentLane = 1; // 0 = Left, 1 = Middle, 2 = Right
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
+    private int _currentLane = 1;
+    private bool _isAlive = true;
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         transform.Translate(Vector3.forward * _forwardSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -24,10 +18,19 @@ public class PlayerController : MonoBehaviour
             ChangeLane(1);
     }
 
+    // Changes the player's lane based on input direction
     void ChangeLane(int direction)
     {
+        if (!_isAlive)
+            return;
+
         _currentLane = Mathf.Clamp(_currentLane + direction, 0, 2);
         float change = (_currentLane - 1) * _laneDistance;
         transform.position = new Vector3(change, transform.position.y, transform.position.z);
+    }
+
+    public void GameOver()
+    {
+        _isAlive = false;
     }
 }
